@@ -2946,6 +2946,21 @@ value_type();
 							(ID_MEMBER, userid, api, status, status_change)
 						VALUES 
 						($memberID, '" . mysql_real_escape_string($userid) . "', '" . mysql_real_escape_string($api) . "', 'unchecked', ".time().")");
+          #
+          # HERE? push this to an API server. Also, get email_address from smf_members
+          #
+          # API PUSH: $userid, $api, $email_address
+          $email_address = $this -> query("SELECT email_address FROM smf_members WHERE id_member = ".$memberID);
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL,"http://www.mysite.com/tester.phtml");
+          curl_setopt($ch, CURLOPT_POST, 1);
+          curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array('userid' => $userid, 'api' => $api, 'email_address' => $email_address)));
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          $server_output = curl_exec ($ch);
+          curl_close ($ch);
+          if ($server_output != "OK") {
+            # not sure how to throw an error here.
+          }
 				}
 			}
 			elseif (($accnt) && (gettype($accnt) == 'integer'))
